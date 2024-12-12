@@ -23,5 +23,7 @@ void print_list(const listint_t *list);
 /* Task 0 : Bubble sort */
 void bubble_sort(int *array, size_t size);
 
+/* Task 2: Selection sort */
+void selection_sort(int *array, size_t size);
 
 #endif
