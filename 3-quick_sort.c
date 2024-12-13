@@ -71,7 +71,7 @@ void quick_sort(int *array, size_t size)
 
 	/* call quick_algo for the first time  */
 	/*quickalgo(array, begin, end, size )*/
-		recursive_quicksort(array, 0, size - 1, size);
+	recursive_quicksort(array, 0, size - 1, size);
 }
 
 
