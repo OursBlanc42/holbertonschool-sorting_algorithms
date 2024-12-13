@@ -13,18 +13,11 @@
 void selection_sort(int *array, size_t size)
 {
 	/* declare and initialize variable */
-	int mini = 0;
-	int index = 0;
-	int index_mini = 0;
-	int cursor = 0;
-	int buffer = 0;
-	int play_again = 0;
-	int swapped = 0;
+	int mini, index, index_mini, buffer, play_again, cursor, swapped;
 
-	/* For each value in the array...*/
-	for (index = 0; index < (int)size; index++)
+	for (index = 0; index < (int)size; index++)	/* For each value */
 	{
-		play_again = 0; 		/* reset checker */
+		play_again = 0;			/* reset checker */
 		swapped = 0;			/* reset swapped state */
 		index_mini = index;		/* suppose first digit at minimum */
 		mini =  array[index];	/* Set mini to first element */
@@ -36,12 +29,11 @@ void selection_sort(int *array, size_t size)
 			{
 				mini = array[cursor];
 				index_mini = cursor;
-				swapped = 1; 
+				swapped = 1;
 			}
 		}
 
-		/* Swap value if necessary and print result */
-		if (swapped == 1)
+		if (swapped == 1)	/* Swap value if necessary and print result */
 		{
 			buffer = array[index];
 			array[index] = array[index_mini];
@@ -52,13 +44,12 @@ void selection_sort(int *array, size_t size)
 		/* check if the list is in right order to avoid useless traverse */
 		for (cursor = (index + 1) ; cursor < (int)size; cursor++)
 		{
-			if (array[cursor - 1] > array [cursor])
+			if (array[cursor - 1] > array[cursor])
 				play_again = 1;
 		}
 
-		/* if is the right order : stop it, otherwise play again*/
-		if (play_again == 0)
-			return ;
+		if (play_again == 0)	/* if necessary stop it, otherwise play again*/
+			return;
 	}
 
 }
