@@ -20,7 +20,7 @@ void recursive_quicksort(int *array, int bot, int top, size_t size)
 	int stock;
 
 	/* loop in the array */
-	while (top_marker < size)
+	while (top_marker < (int)size)
 	{
 		/* If the current element is less than the pivot, swap it */
 		if (array[top_marker] < value_pivot)
@@ -46,8 +46,8 @@ void recursive_quicksort(int *array, int bot, int top, size_t size)
 	print_array(array, size);
 
 	/* recursive call (left subarray then right sub array)*/
-	recursive_quicksort(array, low, bot_marker - 1, size);
-	recursive_quicksort(array, bot_marker + 1, high, size);
+	recursive_quicksort(array, bot, bot_marker - 1, size);
+	recursive_quicksort(array, bot_marker + 1, top, size);
 }
 
 
@@ -71,7 +71,7 @@ void quick_sort(int *array, size_t size)
 
 	/* call quick_algo for the first time  */
 	/*quickalgo(array, begin, end, size )*/
-		recursive_quicksort(array, 0, size - 1, size)
+		recursive_quicksort(array, 0, size - 1, size);
 }
 
 
