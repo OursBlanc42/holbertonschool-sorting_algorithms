@@ -19,16 +19,14 @@ void recursive_quicksort(int *array, int bot, int top, size_t size)
 	int top_marker = bot;
 	int stock;
 
-	/* loop until reach the top of the list */
-	while (top_marker < top)
+	while (top_marker < top)	/* loop until reach the top of the list */
 	{
 		/* check if current value is less than pivot value*/
 		if (array[top_marker] < value_pivot)
 		{
 			bot_marker++; /* Move the lower marker forward */
 
-			/* Check if swap is necessary */
-			if (array[top_marker] != array[bot_marker])
+			if (array[top_marker] != array[bot_marker])	/* Check if swap */
 			{
 				stock = array[top_marker];	/* Swap value */
 				array[top_marker] = array[bot_marker];
@@ -36,12 +34,10 @@ void recursive_quicksort(int *array, int bot, int top, size_t size)
 				print_array(array, size);	/* Only print if the pivot moved */
 			}
 		}
-
 		top_marker++;	/* Move the top marker forward */
 	}
 
-	/* Place the pivot after the last smaller element */
-	bot_marker++;
+	bot_marker++;	/* Place the pivot after the last smaller element */
 	if (array[bot_marker] != array[top]) /* Check if the pivot have moved */
 	{
 		stock = array[bot_marker]; /* swap value */
