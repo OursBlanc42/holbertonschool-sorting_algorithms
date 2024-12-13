@@ -19,9 +19,6 @@ void recursive_quicksort(int *array, int bot, int top, size_t size)
 	int top_marker = bot;
 	int stock;
 
-	if (bot >= top)	/* stop recursion when the partition is invalid */
-	return;
-
 	/* loop until reach the top of the list */
 	while (top_marker < top)
 	{
@@ -50,8 +47,11 @@ void recursive_quicksort(int *array, int bot, int top, size_t size)
 	print_array(array, size);
 
 	/* Recursive calls for left and right partition */
-	recursive_quicksort(array, bot, bot_marker - 1, size);
-	recursive_quicksort(array, bot_marker + 1, top, size);
+	if (bot < bot_marker - 1) /* Only recurse if the left partition is valid */
+		recursive_quicksort(array, bot, bot_marker - 1, size);
+		
+	if (bot_marker + 1 < top) /* Only recurse if the right partition is valid */
+		recursive_quicksort(array, bot_marker + 1, top, size);
 }
 
 
