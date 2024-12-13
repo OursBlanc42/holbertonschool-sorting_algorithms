@@ -1,6 +1,6 @@
 #include <stddef.h>
 #include "sort.h"
-
+#include <stdio.h>
 
 /**
 * recursive_quicksort - Recursively sorts array of integer
@@ -27,29 +27,33 @@ void recursive_quicksort(int *array, int bot, int top, size_t size)
 		{
 			bot_marker++; /* Move the lower marker forward */
 
-			/* Swap elements */
-			stock = array[top_marker];
-			array[top_marker] = array[bot_marker];
-			array[bot_marker] = stock;
-
-			print_array(array, size);
+			/* Check if swap is necessary */
+			if (array[top_marker] != array[bot_marker])
+			{
+				stock = array[top_marker];	/* Swap value */
+				array[top_marker] = array[bot_marker];
+				array[bot_marker] = stock;
+				print_array(array, size);	/* Only print if the pivot moved */
+			}
 		}
-		/* Move the top marker forward */
-		top_marker++;
+
+		top_marker++;	/* Move the top marker forward */
 	}
 
 	/* Place the pivot after the last smaller element */
 	bot_marker++;
-	stock = array[bot_marker];
-	array[bot_marker] = array[top];
-	array[top] = stock;
-
-	print_array(array, size);
+	if (array[bot_marker] != array[top]) /* Check if the pivot have moved */
+	{
+		stock = array[bot_marker]; /* swap value */
+		array[bot_marker] = array[top];
+		array[top] = stock;
+		print_array(array, size);	/* Only print if the pivot moved */
+	}
 
 	/* Recursive calls for left and right partition */
 	if (bot < bot_marker - 1) /* Only recurse if the left partition is valid */
 		recursive_quicksort(array, bot, bot_marker - 1, size);
-		
+
 	if (bot_marker + 1 < top) /* Only recurse if the right partition is valid */
 		recursive_quicksort(array, bot_marker + 1, top, size);
 }
