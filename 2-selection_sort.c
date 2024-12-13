@@ -51,5 +51,4 @@ void selection_sort(int *array, size_t size)
 		if (play_again == 0)	/* if necessary stop it, otherwise play again*/
 			return;
 	}
-
 }
