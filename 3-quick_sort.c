@@ -13,43 +13,46 @@
 */
 void recursive_quicksort(int *array, int bot, int top, size_t size)
 {
-	/* declare and define value */
+	/* declare and initialize variable */
 	int value_pivot = array[top];
+	int bot_marker = bot - 1;
 	int top_marker = bot;
-	int bot_marker = top_marker - 1;
 	int stock;
 
-	/* loop in the array */
-	while (top_marker < (int)size)
+	if (bot >= top)	/* stop recursion when the partition is invalid */
+	return;
+
+	/* loop until reach the top of the list */
+	while (top_marker < top)
 	{
-		/* If the current element is less than the pivot, swap it */
+		/* check if current value is less than pivot value*/
 		if (array[top_marker] < value_pivot)
 		{
-			bot_marker++; /* update marker forward */
+			bot_marker++; /* Move the lower marker forward */
 
-			/* swap element */
+			/* Swap elements */
 			stock = array[top_marker];
 			array[top_marker] = array[bot_marker];
 			array[bot_marker] = stock;
+
+			print_array(array, size);
 		}
-		/* update top marker forward */
+		/* Move the top marker forward */
 		top_marker++;
 	}
 
-	/* Once is done, update pivot position after the smallest element swapped */
+	/* Place the pivot after the last smaller element */
 	bot_marker++;
 	stock = array[bot_marker];
-	array[bot_marker] = array[size - 1];
-	array[size - 1] = stock;
+	array[bot_marker] = array[top];
+	array[top] = stock;
 
-	/* print after each swap */
 	print_array(array, size);
 
-	/* recursive call (left subarray then right sub array)*/
+	/* Recursive calls for left and right partition */
 	recursive_quicksort(array, bot, bot_marker - 1, size);
 	recursive_quicksort(array, bot_marker + 1, top, size);
 }
-
 
 
 /**
@@ -70,7 +73,7 @@ void quick_sort(int *array, size_t size)
 		return;
 
 	/* call quick_algo for the first time  */
-	/*quickalgo(array, begin, end, size )*/
+	/* quickalgo(array, begin, end, size ) */
 	recursive_quicksort(array, 0, size - 1, size);
 }
 
