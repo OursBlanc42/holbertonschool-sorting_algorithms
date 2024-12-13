@@ -1,47 +1,77 @@
 #include <stddef.h>
 #include "sort.h"
+
+
 /**
-* quick_sort - function that sorts an array of integers in ascending order
+* recursive_quicksort - Recursively sorts array of integer
+* by swap value arount a pivot (quick sort)
+* @array: array to sort witch quick sort algorithm
+* @bot: low index of the partition
+* @top: high index of the partiion
+* @size: size of the array
+* Return: nothing
+*/
+void recursive_quicksort(int *array, int bot, int top, size_t size)
+{
+	/* declare and define value */
+	int value_pivot = array[top];
+	int top_marker = bot;
+	int bot_marker = top_marker - 1;
+	int stock;
+
+	/* loop in the array */
+	while (top_marker < size)
+	{
+		/* If the current element is less than the pivot, swap it */
+		if (array[top_marker] < value_pivot)
+		{
+			bot_marker++; /* update marker forward */
+
+			/* swap element */
+			stock = array[top_marker];
+			array[top_marker] = array[bot_marker];
+			array[bot_marker] = stock;
+		}
+		/* update top marker forward */
+		top_marker++;
+	}
+
+	/* Once is done, update pivot position after the smallest element swapped */
+	bot_marker++;
+	stock = array[bot_marker];
+	array[bot_marker] = array[size - 1];
+	array[size - 1] = stock;
+
+	/* print after each swap */
+	print_array(array, size);
+
+	/* recursive call (left subarray then right sub array)*/
+	recursive_quicksort(array, low, bot_marker - 1, size);
+	recursive_quicksort(array, bot_marker + 1, high, size);
+}
+
+
+
+/**
+* quick_sort - Entry point :
+* by using algorithm quick sort
 * @array: array to sort witch quick sort algorithm
 * @size: size of the array
 * Return: nothing
 */
 void quick_sort(int *array, size_t size)
 {
-	size_t pivot, index, preceding;
-	int stock;
+	/* Check special case*/
+	if (array == NULL)
+		return;
 
 	/* if there is one value in the array, nothing to sort*/
 	if (size < 2)
 		return;
 
-	/* We place the pivot on the last element*/
-	pivot = size - 1;
-	preceding = 0;
-
-	/* partitionning the array*/
-	for (index = 0; index < pivot; index++)
-	{
-		/* If the current element is less than the pivot, swap it */
-		if (array[index] < array[pivot])
-		{
-			stock = array[index];
-			array[index] = array[preceding];
-			array[preceding] = stock;
-
-			preceding++;
-			/* print after every swap*/
-			print_array(array, size);
-		}
-	}
-
-	stock = array[preceding];
-	array[preceding] = array[pivot];
-	array[pivot] = stock;
- /* print after placing the pivot*/
-	print_array(array, size);
-	/* sort the left part*/
-	quick_sort(array, preceding);
-	/* sort the right part*/
-	quick_sort(array + preceding + 1, size - preceding - 1);
+	/* call quick_algo for the first time  */
+	/*quickalgo(array, begin, end, size )*/
+		recursive_quicksort(array, 0, size - 1, size)
 }
+
+
