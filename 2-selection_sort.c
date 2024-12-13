@@ -18,36 +18,43 @@ void selection_sort(int *array, size_t size)
 	int index_mini = 0;
 	int cursor = 0;
 	int buffer = 0;
-	int swapped = 0;
+	int play_again = 0;
 
 	/* For each value in the array...*/
-	for (cursor = 0; cursor < (int)size; cursor++)
+	for (index = 0; index < (int)size; index++)
 	{
-		swapped = 0;	/* reset swapped state */
-		mini = array[cursor];
+		play_again = 0; 		/* reset checker */
+		index_mini = index;		/* suppose first digit at minimum */
+		mini =  array[index];	/* Set mini to first element */
 
-		/* traverse the array and find the minimum value */
-		for (index = cursor; index < (int)size; index++)
+		/* Search minimum element in the list */
+		for (cursor = (index + 1) ; cursor < (int)size; cursor++)
 		{
-			/* check if we find a smaller value*/
-			if (array[index] < mini)
+			if (array[cursor] < mini)
 			{
-				mini = array[index];
-				index_mini = index;
-				swapped = 1;
+				mini = array[cursor];
+				index_mini = cursor;
 			}
 		}
 
-		/* swap value */
-		buffer = array[index_mini];
-		array[index_mini] = array[cursor];
-		array[cursor] = buffer;
-
+		/* Swap value and print result */
+		buffer = array[index];
+		array[index] = array[index_mini];
+		array[index_mini] = buffer;
 		print_array((const int *)array, size);
 
-		/* if zero swap that mean everything is ordered */
-		if (swapped == 0)
-			return;
+		/* check if the list is in right order to avoid useless traverse */
+		for (cursor = (index + 1) ; cursor < (int)size; cursor++)
+		{
+			if (array[cursor - 1] > array [cursor])
+			{
+				play_again = 1;
+			}
+		}
+
+		/* if is the right order : stop it, otherwise play again*/
+		if (play_again == 0)
+			return ;
 	}
 
 }
